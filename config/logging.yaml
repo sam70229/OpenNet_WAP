@@ -1,0 +1,30 @@
+version: 1
+disable_existing_loggers: False
+
+formatters:
+    Brief:
+        format: "[%(levelname)s]-[%(asctime)s]-[%(processName)s]: %(message)s"
+        datefmt: "%Y-%m-%d %H:%M:%S"
+    Debug:
+        format: "[%(levelname)s]-[%(asctime)s]-[%(processName)s]: %(message)s (%(name)s)"
+        datefmt: "%Y-%m-%d %H:%M:%S"
+    
+handlers:
+    Console:
+        class: "logging.StreamHandler"
+        level: "INFO"
+        formatter: "Brief"
+        stream: "ext://sys.stdout"
+    File:
+        class: "logging.FileHandler"
+        level: "DEBUG"
+        formatter: "Debug"
+        filename: "logs/pytest.log"
+        mode: "w"
+
+loggers:
+    "":
+        level: "NOTSET"
+        handlers: ["Console", "File"]
+    "selenium":
+        level: "ERROR"

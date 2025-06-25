@@ -1,0 +1,17 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Pytest generates
+.pytest_cache
+
+# Virtual environments
+.venv
+venv/
+
+# logs
+logs/*
