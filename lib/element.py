@@ -1,10 +1,12 @@
-
+import logging
 from typing import Optional, TypeVar
 
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
+
+logger = logging.getLogger(__name__)
 
 
 class Locator:
@@ -58,6 +60,7 @@ class Element:
 
     @property
     def text(self) -> str:
+        logger.debug(f"Element text is {self._element.text}")
         return self._element.text
     
     @property
@@ -85,9 +88,11 @@ class Element:
     
     # actions
     def click(self) -> None:
+        logger.debug(f"Clicking on element {self._element}")
         self._element.click()
 
     def input(self, value: str) -> None:
+        logger.debug(f"Inputing {value} to element {self._element}")
         self._element.send_keys(str(value))
 
     def clear(self) -> None:
