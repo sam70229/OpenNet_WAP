@@ -25,6 +25,8 @@ logger = logging.getLogger(__name__)
 logger.info(f"Logging config loaded from: {LOGGING_CONFIG_PATH}")
 
 
-def pytest_runtest_teardown(item, nextitem):
-    driver: WebDriver = item.funcargs["driver"]
-    driver.get_screenshot_as_file("logs/error_screenshot.png")
+def pytest_runtest_makereport(item, call):
+    if call.when == "call":
+        if call.excinfo is not None:
+            driver: WebDriver = item.funcargs["driver"]
+            driver.get_screenshot_as_file("logs/error_screenshot.png")
